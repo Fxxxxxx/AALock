@@ -30,21 +30,21 @@ extern "C" {
 }
 #endif
 
-#define AAScopeLock(lock) \
+#define AAScopedLock(lock) \
 aa_keywordify \
 [lock lock]; \
 @aaDefer { \
 [lock unlock]; \
 }
 
-#define AAScopeWriteLock(lock) \
+#define AAScopedWriteLock(lock) \
 aa_keywordify \
 [lock writeLock]; \
 @aaDefer { \
 [lock unlock]; \
 }
 
-#define AAScopeReadLock(lock) \
+#define AAScopedReadLock(lock) \
 aa_keywordify \
 [lock readLock]; \
 @aaDefer { \
