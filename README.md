@@ -426,13 +426,13 @@ public final class AARWLock: NSObject, AARWLockProtocol {
 
 欢迎提交 Issue 和 Pull Request！
 
+如果您觉得当前代码对您有帮助，欢迎打赏鼓励👏🏻
+
+![WechatIMG1.jpg](https://upload-images.jianshu.io/upload_images/3569202-6de026dccfefd817.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 ## 📄 许可证
 
 AALock 基于 MIT 许可证开源。详见 [LICENSE](LICENSE) 文件。
-
-## 👨‍💻 作者
-
-Aaron Feng - aaronfeng1993@163.com
 
 ---
 
