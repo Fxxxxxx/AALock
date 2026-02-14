@@ -8,7 +8,7 @@
 import Foundation
 
 @objcMembers
-public final class AARWLock: NSObject, AARWLockProtocol {
+public final class AARWLock: NSObject, AARWLockProtocol, @unchecked Sendable {
     
     private var rwLock: pthread_rwlock_t = .init()
     public override init() {

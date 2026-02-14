@@ -8,7 +8,7 @@
 import Foundation
 
 @objcMembers
-public final class AAUnfairLock: NSObject, NSLocking {
+public final class AAUnfairLock: NSObject, NSLocking, @unchecked Sendable {
     
     private var ufLock: os_unfair_lock = .init()
     
