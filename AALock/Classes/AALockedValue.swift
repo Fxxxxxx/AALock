@@ -58,17 +58,6 @@ public final class AARWLockedValue<Value>: @unchecked Sendable {
         self.lock = lock
     }
     
-    // MARK: - 普通锁 API（兼容 NSLocking）
-    /// 加锁访问并修改数据（写操作，无论读写锁/普通锁都走写锁逻辑）
-    /// - Parameter block: 闭包内可读写数据，闭包返回值会更新原始数据
-    /// - Returns: 闭包执行结果
-    @discardableResult
-    public func withLock<T>(_ block: (inout Value) throws -> T) rethrows -> T {
-        try lock.lock {
-            try block(&_value)
-        }
-    }
-    
     // MARK: - 读写锁专属 API
     /// 加读锁访问数据（仅读，不可修改）
     /// - Parameter block: 闭包内只读数据
@@ -84,9 +73,9 @@ public final class AARWLockedValue<Value>: @unchecked Sendable {
     /// - Parameter block: 闭包内可读写数据，闭包返回值会更新原始数据
     /// - Returns: 闭包执行结果
     @discardableResult
-    public func withWriteLock<T>(_ block: (inout Value) -> T) -> T {
-        lock.writeLock {
-            block(&_value)
+    public func withWriteLock<T>(_ block: (inout Value) throws -> T) rethrows -> T {
+        try lock.writeLock {
+            try block(&_value)
         }
     }
     

@@ -127,13 +127,7 @@ class ViewController: UIViewController {
         }
         readGroup.wait()
         
-        // 3. 通用withLock（等价于写锁）
-        rwLockedArray.withLock { array in
-            array.removeLast()
-            print("AARWLockedValue - 通用锁删除最后一个元素: \(array)")
-        }
-        
-        // 4. 便捷取值（自动加读锁）
+        // 3. 便捷取值（自动加读锁）
         print("AARWLockedValue - 便捷取值: \(rwLockedArray.value)")
     }
     
