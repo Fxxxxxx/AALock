@@ -28,9 +28,9 @@ public final class AALockedValue<Value>: @unchecked Sendable {
     /// - Parameter block: 闭包内可读写数据，闭包返回值会更新原始数据
     /// - Returns: 闭包执行结果
     @discardableResult
-    public func withLock<T>(_ block: (inout Value) -> T) -> T {
-        lock.lock {
-            block(&_value)
+    public func withLock<T>(_ block: (inout Value) throws -> T) rethrows -> T {
+        try lock.lock {
+            try block(&_value)
         }
     }
     
@@ -63,9 +63,9 @@ public final class AARWLockedValue<Value>: @unchecked Sendable {
     /// - Parameter block: 闭包内可读写数据，闭包返回值会更新原始数据
     /// - Returns: 闭包执行结果
     @discardableResult
-    public func withLock<T>(_ block: (inout Value) -> T) -> T {
-        lock.lock {
-            block(&_value)
+    public func withLock<T>(_ block: (inout Value) throws -> T) rethrows -> T {
+        try lock.lock {
+            try block(&_value)
         }
     }
     
@@ -74,9 +74,9 @@ public final class AARWLockedValue<Value>: @unchecked Sendable {
     /// - Parameter block: 闭包内只读数据
     /// - Returns: 闭包执行结果
     @discardableResult
-    public func withReadLock<T>(_ block: (Value) -> T) -> T {
-        lock.readLock {
-            block(_value)
+    public func withReadLock<T>(_ block: (Value) throws -> T) rethrows -> T {
+        try lock.readLock {
+            try block(_value)
         }
     }
     

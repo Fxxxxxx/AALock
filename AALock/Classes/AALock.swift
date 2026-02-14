@@ -13,29 +13,32 @@ public protocol AARWLockProtocol: NSLocking {
 }
 
 public extension NSLocking {
-    func lock<T>(_ block: () -> T) -> T {
+    @discardableResult
+    func lock<T>(_ block: () throws -> T) rethrows -> T {
         self.lock()
         defer {
             self.unlock()
         }
-        return block()
+        return try block()
     }
 }
 
 public extension AARWLockProtocol {
-    func readLock<T>(_ block: () -> T) -> T {
+    @discardableResult
+    func readLock<T>(_ block: () throws -> T) rethrows -> T {
         self.readLock()
         defer {
             self.unlock()
         }
-        return block()
+        return try block()
     }
     
-    func writeLock<T>(_ block: () -> T) -> T {
+    @discardableResult
+    func writeLock<T>(_ block: () throws -> T) rethrows -> T {
         self.writeLock()
         defer {
             self.unlock()
         }
-        return block()
+        return try block()
     }
 }
