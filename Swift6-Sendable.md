@@ -64,7 +64,7 @@ DispatchQueue.global().async {
 
 ```swift
 // AALockedValue 核心定义（简化版）
-public final class AALockedValue<Value>: Sendable {
+public final class AALockedValue<Value>: @unchecked Sendable {
     private let lock: AAUnfairLock
     private var _value: Value
     
@@ -113,6 +113,7 @@ lock.unlock()
 
 ### 2. 高性能场景：读写锁（AARWLock）
 读多写少场景下，读写锁性能远超普通互斥锁：
+
 ```swift
 let rwLock = AARWLock()
 let rwLockedArray = AARWLockedValue(value: [Int]())
